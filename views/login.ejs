@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1>Login</h1>
+    
+    <form action="/login" method="post">
+      <div class="radio-options">
+        <label for="emailOption">
+          <input type="radio" id="emailOption" name="loginOption" value="email" checked>
+          Email id
+        </label>
+        
+        <label for="phoneOption">
+          <input type="radio" id="phoneOption" name="loginOption" value="phone">
+          Phone Number
+        </label>
+      </div>
+      
+      <div id="emailInput">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email">
+      </div>
+      
+      <div id="phoneInput" style="display:none;">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" name="phone" id="phone" pattern="[0-9]{10}">
+      </div>
+      
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <!-- validating email or phone number details -->
+  <script>
+    document.getElementsByName('loginOption').forEach((option) => {
+      option.addEventListener('change', () => {
+        if (option.value === 'email') {
+          document.getElementById('emailInput').style.display = 'block';
+          document.getElementById('phoneInput').style.display = 'none';
+        } else {
+          document.getElementById('emailInput').style.display = 'none';
+          document.getElementById('phoneInput').style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- registration page -->
+  <h1>Registration</h1>
+  <form action="/register" method="post">
+    <label for="fullName">Full Name:</label>
+    <input type="text" name="fullName" id="fullName" required>
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <br>
+    <label for="phone">Phone Number:</label>
+    <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+  <!-- <a href="/login" >Login</a> -->
+  <% if (typeof error !== 'undefined') { %>
+    <p><%= error %></p>
+  <% } %>
+</body>
+</html>

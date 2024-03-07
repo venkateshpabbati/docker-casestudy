@@ -1,0 +1,74 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Details</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Booking Details</h1>
+  <!-- <form action="/booking-details" method="get">
+    <label for="filter">Filter:</label>
+    <select name="filter" id="filter">
+      <option value="all">All</option>
+      <option value="active">Active</option>
+      <option value="cancelled">Cancelled</option>
+    </select>
+    <button type="submit">Filter</button>
+  </form> -->
+  
+  <% if (Object.keys(bookingData).length > 0) { %>
+    <table align="center">
+      <tr>
+        <th>Total Passengers</th>
+        <th>Passenger Names</th>
+        <th>Source</th>
+        <th>Destination</th>
+        <th>Date of Journey</th>
+        <th>Train Class</th>
+        <th>Total Price</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr> <!-- // for each passenger displaying all the details -->
+     <% bookingData.forEach(booking => { %>
+        <tr>
+          <td><%= booking.passengers %></td> 
+           <!-- <td><%= booking.passengerNames.join(', ') %></td>  -->
+          <td><%= booking.passengerNames ? booking.passengerNames.join(', ') : '' %></td>
+          <td><%= booking.source %></td>
+          <td><%= booking.destination %></td>
+          <td><%= booking.dateOfJourney %></td>
+          <td><%= booking.trainClass %></td>
+          <td><%= booking.totalPrice %></td>
+          <td><%= booking.status %></td>
+           <td>
+              <% if (booking.status === 'active') { %>
+             <form action="/cancel-booking" method="post">
+             <input type="hidden" name="bookingId" value="<%= booking._id %>">
+             <button type="submit">Cancel</button>
+           </form>
+        <% } %>
+    </td>
+        </tr>
+        <!-- <tr>
+          <td><strong>Total Passengers</strong> <%= booking.totalPassengers %></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr> -->
+      <% }) %>
+    </table>
+    <a href="/booking" >Back to Dashboard</a>
+  <% } else { %>
+    <p><center>No booking details found.</center></p>
+    <a href="/booking" >Back to Dashboard</a>
+  <% } %>
+</body>
+</html> 
+
+  

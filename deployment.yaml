@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  name: nodejs-deployment  
+  labels:    
+    app: docker-nodejs
+spec:  
+  replicas: 1  
+  selector:    
+    matchLabels:
+      app: docker-nodejs
+  template:
+    metadata:
+      labels:
+        app: docker-nodejs
+    spec: 
+     containers:
+      - name: docker-nodejs
+        image: geethanjaligandu/mini-docker-nodejs
+        ports:
+        - containerPort: 3080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-service
+  labels:
+    app: docker-nodejs
+spec:
+  type: NodePort
+  ports:
+  - port: 3080
+    protocol: TCP
+    targetPort: 3080
+    nodePort: 32121
+  selector:
+    app: docker-nodejs

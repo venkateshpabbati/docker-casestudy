@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Booking</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>New Booking</h1>
+  <form action="/new-booking" method="post">
+    <label for="passengers">Number of Passengers:</label>
+    <input type="number" name="passengers" id="passengers" min="1" required>
+    <br>
+    <label for="passengerNames">Passenger Names (comma-separated):</label>
+    <input type="text" name="passengerNames" id="passengerNames" required>
+    <br>
+    <label for="source">Source Location:</label>
+    <input type="text" name="source" id="source" required>
+    <br>
+    <label for="destination">Destination Location:</label>
+    <input type="text" name="destination" id="destination" required>
+    <br>
+    <label for="dateOfJourney">Date of Journey:</label>
+    <input type="date" name="dateOfJourney" id="dateOfJourney" required>
+    <br>
+    <label for="trainClass">Train Class:</label>
+    <select name="trainClass" id="trainClass">
+      <option value="1st-class">1st Class</option>
+      <option value="2nd-class">2nd Class</option>
+      <option value="general">General</option>
+    </select>
+    
+    <input type="number" name="totalPrice" id="totalPrice" readonly>
+
+    
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+<script>
+  // Price per passenger based on train class
+  const pricePerPassenger = {
+    '1st-class': 100,
+    '2nd-class': 50,
+    'general': 20
+  };
+
+  // Get references to the train class dropdown, passengers input, and total price input
+  const trainClassDropdown = document.getElementById('trainClass');
+  const passengersInput = document.getElementsByName('passengers')[0];
+  const totalPriceInput = document.getElementById('totalPrice');
+
+  // Function to update the total price based on train class and passenger count
+  function updateTotalPrice() {
+    const selectedClass = trainClassDropdown.value;
+    const passengers = parseInt(passengersInput.value) || 0;
+    const price = passengers * pricePerPassenger[selectedClass];
+    totalPriceInput.value = price;
+  }
+
+  // Adding event listeners to update the total price when the train class or passenger count changes
+  trainClassDropdown.addEventListener('change', updateTotalPrice);
+  passengersInput.addEventListener('change', updateTotalPrice);
+  passengersInput.addEventListener('keyup', updateTotalPrice);
+
+  // Initialize the total price
+  updateTotalPrice();
+</script>
+</html>

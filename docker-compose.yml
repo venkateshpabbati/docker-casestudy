@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nodejs-container1
+    ports:
+      - "3080:3080"
+    environment:
+      MONGO_URI: mongodb://mongo:27017/testDB
+    depends_on:
+      - mongo
+  mongo:
+             container_name: mongodb-container1
+             image: mongo
+             volumes:
+               - ./data:/data/db
+             ports:
+               - '27017:27017'
+
+     
