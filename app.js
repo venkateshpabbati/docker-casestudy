@@ -35,7 +35,11 @@ app.use(session({
 
 mongoUrl: MongoDBURI,
 mongooseConnection: db
-  })
+  }),
+  cookie: {
+    secure: true,
+    httpOnly: true
+  }
 }));
 
 //HTTP routes
