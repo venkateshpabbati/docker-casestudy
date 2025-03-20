@@ -214,7 +214,7 @@ try {
     } else {
       try {
         const bookingId = req.body.bookingId;
-        await Booking.updateOne({ _id: bookingId, userId: req.session.user._id }, { $set: { status: 'cancelled' } });
+        await Booking.updateOne({ _id: { $eq: bookingId }, userId: req.session.user._id }, { $set: { status: 'cancelled' } });
         res.redirect('/booking-details');
       } catch (err) {
         console.error(err);
